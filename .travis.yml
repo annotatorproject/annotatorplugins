@@ -85,19 +85,28 @@ before_script:
  - mkdir build
  - cd build
  - cmake ..
- - make
+ - make -j8
+ - cd ../../
+
+ - git clone https://github.com/lasmue/annotator
+ - cd annotator
+ - git submodule update --init --recursive
+ - mkdir build
+ - cd build
+ - cmake -DCMAKE_CXX_COMPILER=$CXX -Dannotatorlib_DIR=../annotatorlib ..
+ - make -j8
  - cd ../../
 
  - mkdir build
  - cd build
- - cmake -DCMAKE_CXX_COMPILER=$CXX -Dannotatorlib_DIR=annotatorlib ..
+ - cmake -DCMAKE_CXX_COMPILER=$CXX -Dannotatorlib_DIR=annotatorlib -Dannotator_DIR=annotator ..
 script:
  - make -j4
 
 notifications:
   webhooks:
     urls:
-      - https://webhooks.gitter.im/e/aeb39f01907f575253df
+      - https://webhooks.gitter.im/e/fb49f026a4f17efe30d2
     on_success: change
     on_failure: always
     on_start: never
