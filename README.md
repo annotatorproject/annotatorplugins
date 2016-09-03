@@ -1,5 +1,7 @@
 # AnnotatorPlugins [ ![Build Status] [travis-image] ] [travis] [ ![Documentation] [codedocs-image] ] [codedocs] [ ![Gitter] [gitter-image] ] [gitter]
 
+[![Join the chat at https://gitter.im/lasmue/annotatorplugins](https://badges.gitter.im/lasmue/annotatorplugins.svg)](https://gitter.im/lasmue/annotatorplugins?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [travis-image]: https://travis-ci.org/lasmue/annotator.png?branch=master
 [travis]: http://travis-ci.org/lasmue/annotatorplugins
 
