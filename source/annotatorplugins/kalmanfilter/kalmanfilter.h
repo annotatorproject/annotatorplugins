@@ -28,25 +28,15 @@ class KalmanFilter : public Plugin {
   QString getName() override;
   QWidget *getWidget() override;
 
-  bool setFrame(AnnotatorLib::Frame *frame, cv::Mat image) override;
-  void setObject(AnnotatorLib::Object *object) override;
-  AnnotatorLib::Object *getObject() override;
-  void setLastAnnotation(AnnotatorLib::Annotation *annotation) override;
-  std::vector<AnnotatorLib::Commands::Command *> getCommands() override;
-  void setSession(AnnotatorLib::Session *session) override;
-  void calculate(AnnotatorLib::Object *object, AnnotatorLib::Frame *frame,
-                 cv::Mat image);
+  bool setFrame(shared_ptr<AnnotatorLib::Frame> frame, cv::Mat image) override;
+  void setObject(shared_ptr<AnnotatorLib::Object> object) override;
+  shared_ptr<AnnotatorLib::Object> getObject() override;
+  void setLastAnnotation(shared_ptr<AnnotatorLib::Annotation> annotation) override;
+  std::vector<shared_ptr<AnnotatorLib::Commands::Command>> getCommands() override;
 
  protected:
-  AnnotatorLib::Annotation *lastAnnotation = nullptr;
-  AnnotatorLib::Object *object = nullptr;
-  AnnotatorLib::Session *session = nullptr;
 
   Widget widget;
-
-  AnnotatorLib::Frame *frame = nullptr;
-  AnnotatorLib::Frame *lastFrame = nullptr;
-  cv::Mat frameImg;
 };
 }
 }
