@@ -30,7 +30,7 @@ class KalmanFilter : public Plugin {
 
   bool setFrame(shared_ptr<AnnotatorLib::Frame> frame, cv::Mat image) override;
   void setObject(shared_ptr<AnnotatorLib::Object> object) override;
-  shared_ptr<AnnotatorLib::Object> getObject() override;
+  shared_ptr<AnnotatorLib::Object> getObject() const override;
   void setLastAnnotation(shared_ptr<AnnotatorLib::Annotation> annotation) override;
   std::vector<shared_ptr<AnnotatorLib::Commands::Command>> getCommands() override;
 

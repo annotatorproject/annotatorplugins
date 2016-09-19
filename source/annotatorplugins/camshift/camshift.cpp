@@ -42,7 +42,7 @@ void CamShift::setObject(shared_ptr<Object> object) {
   this->object = object;
 }
 
-shared_ptr<Object> CamShift::getObject() { return object; }
+shared_ptr<Object> CamShift::getObject() const { return object; }
 
 // second call
 void CamShift::setLastAnnotation(shared_ptr<Annotation> annotation) {

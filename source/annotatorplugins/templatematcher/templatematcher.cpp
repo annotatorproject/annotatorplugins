@@ -36,7 +36,7 @@ void TemplateMatcher::setObject(shared_ptr<Object> object) {
   this->initialized = false;
 }
 
-shared_ptr<Object> TemplateMatcher::getObject() { return object; }
+shared_ptr<Object> TemplateMatcher::getObject() const { return object; }
 
 // second call
 void TemplateMatcher::setLastAnnotation(shared_ptr<Annotation> annotation) {

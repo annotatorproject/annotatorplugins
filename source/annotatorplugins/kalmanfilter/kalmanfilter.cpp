@@ -36,7 +36,7 @@ void KalmanFilter::setObject(shared_ptr<AnnotatorLib::Object> object)
     throw std::runtime_error("not implemented yet!");
 }
 
-shared_ptr<AnnotatorLib::Object> KalmanFilter::getObject()
+shared_ptr<AnnotatorLib::Object> KalmanFilter::getObject() const
 {
     throw std::runtime_error("not implemented yet!");
 }
