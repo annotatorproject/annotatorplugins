@@ -2,8 +2,11 @@
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_MAIN ${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
 
+get_target_property(annotator_config annotator::annotatorplugin "IMPORTED_CONFIGURATIONS")
+foreach(CONFIG ${annotator_config})
+get_target_property(annotator_so annotator::annotatorplugin "IMPORTED_LOCATION_${CONFIG}")
+endforeach()
 
-get_target_property(annotator_so annotator::annotatorplugin "IMPORTED_LOCATION_NOCONFIG")
 get_filename_component(annotator_bin_dir ${annotator_so} DIRECTORY)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${annotator_bin_dir}/plugins")
 
