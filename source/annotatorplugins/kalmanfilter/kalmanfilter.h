@@ -1,14 +1,17 @@
 #ifndef KALMANFILTER_H
 #define KALMANFILTER_H
 
-#include <annotator/plugins/plugin.h>
-#include "widget.h"
+#include <memory>
 
-#include <opencv2/core/mat.hpp>
-
-#include <QtCore/QObject>
 #include <QtCore/QtPlugin>
-#include <QtGui/QIcon>
+
+#include <opencv2/video/tracking.hpp>
+
+#include <annotator/plugins/plugin.h>
+#include <AnnotatorLib/Object.h>
+#include <AnnotatorLib/Frame.h>
+
+#include "widget.h"
 
 namespace AnnotatorLib {
 class Session;
@@ -37,6 +40,15 @@ class KalmanFilter : public Plugin {
  protected:
 
   Widget widget;
+  shared_ptr<AnnotatorLib::Object> object;
+  shared_ptr<AnnotatorLib::Frame> frame;
+  cv::KalmanFilter KF;
+  cv::Mat measurement;
+  cv::Mat out;
+  bool initialized = false;
+
+
+  void init();
 };
 }
 }
