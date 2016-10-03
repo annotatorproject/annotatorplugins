@@ -44,7 +44,7 @@ class KalmanFilter : public Plugin {
   shared_ptr<AnnotatorLib::Frame> frame;
   cv::KalmanFilter KF;
   cv::Mat measurement;
-  cv::Mat out;
+  std::pair<cv::Rect2f, bool> out;
   bool initialized = false;
 
 
