@@ -27,7 +27,7 @@ KalmanFilter::~KalmanFilter() { }
 
 void KalmanFilter::init() {
     int dynamParams = 6;   //x,y,dx,dy,w,h
-    int measureParams = 2; //x,y,w,h
+    int measureParams = 4; //x,y,w,h
     int controlParams = 0;
     KF.init(dynamParams, measureParams, controlParams, CV_32F);
 
@@ -53,23 +53,12 @@ void KalmanFilter::init() {
     KF.measurementMatrix.at<float>(23) = 1.0f;
 
     // Process Noise Covariance Matrix Q
-    // [ Ex 0  0    0 0    0 ]
-    // [ 0  Ey 0    0 0    0 ]
-    // [ 0  0  Ev_x 0 0    0 ]
-    // [ 0  0  0    1 Ev_y 0 ]
-    // [ 0  0  0    0 1    Ew ]
-    // [ 0  0  0    0 0    Eh ]
-    KF.processNoiseCov.at<float>(0) = 1e-2;
-    KF.processNoiseCov.at<float>(7) = 1e-2;
-    KF.processNoiseCov.at<float>(14) = 2.0f;
-    KF.processNoiseCov.at<float>(21) = 1.0f;
-    KF.processNoiseCov.at<float>(28) = 1e-2;
-    KF.processNoiseCov.at<float>(35) = 1e-2;
+    cv::setIdentity(KF.processNoiseCov, cv::Scalar::all(1e-5));
 
     // Measures Noise Covariance Matrix R
-    cv::setIdentity(KF.measurementNoiseCov, cv::Scalar(1e-1));
+    cv::setIdentity(KF.measurementNoiseCov, cv::Scalar(1));
 
-    setIdentity(KF.errorCovPost, Scalar::all(1));
+    setIdentity(KF.errorCovPost, Scalar::all(1e-1));
 
     measurement.create(measureParams, 1, CV_32F);
     measurement.setTo(Scalar(0));
@@ -77,6 +66,7 @@ void KalmanFilter::init() {
     out.second = false;
 
     initialized = true;
+    invisibleCt = 0;
 }
 
 QString KalmanFilter::getName() { return "KalmanFilter"; }
@@ -111,6 +101,9 @@ bool KalmanFilter::setFrame(shared_ptr<AnnotatorLib::Frame> frame, cv::Mat image
             out.first.width =  estimation.at<float>(4);
             out.first.height =  estimation.at<float>(5);
             out.second = false; //does previously exist
+            invisibleCt = 0;
+        } else {
+          ++invisibleCt;
         }
 
         std::cout << "Predicting kalman to:(" << out.first << ")" << std::endl;
@@ -158,7 +151,7 @@ void KalmanFilter::setLastAnnotation(shared_ptr<AnnotatorLib::Annotation> annota
 std::vector<shared_ptr<AnnotatorLib::Commands::Command> > KalmanFilter::getCommands()
 {
     std::vector<shared_ptr<AnnotatorLib::Commands::Command> > commands;
-    if (initialized) {
+    if (initialized && invisibleCt < kMaxInvisibility) {
         shared_ptr<AnnotatorLib::Commands::Command> cmd;
         if (out.second) {
           cmd = std::make_shared<AnnotatorLib::Commands::NewAnnotation>(getProject()->getSession(),

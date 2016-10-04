@@ -26,6 +26,9 @@ class KalmanFilter : public Plugin {
   Q_INTERFACES(Annotator::Plugin)
 
  public:
+
+  const int kMaxInvisibility = 5;
+
   KalmanFilter();
   ~KalmanFilter();
   QString getName() override;
@@ -43,6 +46,7 @@ class KalmanFilter : public Plugin {
   shared_ptr<AnnotatorLib::Object> object;
   shared_ptr<AnnotatorLib::Frame> frame;
   cv::KalmanFilter KF;
+  int invisibleCt = 0;
   cv::Mat measurement;
   std::pair<cv::Rect2f, bool> out;
   bool initialized = false;
