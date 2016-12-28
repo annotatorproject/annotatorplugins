@@ -32,6 +32,7 @@ set(DEFAULT_PROJECT_OPTIONS
  find_package(Qt5LinguistTools REQUIRED)
  find_package(Qt5Xml REQUIRED)
  find_package( OpenCV REQUIRED )
+ find_package(Poco COMPONENTS Foundation Util Data Net DataMySQL REQUIRED)
  find_package( annotatorlib )
  find_package( annotator )
 
@@ -46,7 +47,7 @@ set(DEFAULT_INCLUDE_DIRECTORIES)
 # Libraries
 # 
 
-set(DEFAULT_LIBRARIES  annotatorlib::annotatorlib annotator::annotatorplugin ${Boost_LIBRARIES} Qt5::Core Qt5::Widgets Qt5::Network Qt5::Xml ${OpenCV_LIBS})
+set(DEFAULT_LIBRARIES  annotatorlib::annotatorlib annotator::annotatorplugin ${Boost_LIBRARIES} ${Poco_LIBRARIES} Qt5::Core Qt5::Widgets Qt5::Network Qt5::Xml ${OpenCV_LIBS})
 
 
 # 
