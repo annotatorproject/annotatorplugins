@@ -13,5 +13,6 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${annotator_bin_dir}/plugins")
 add_subdirectory(camshift)
 add_subdirectory(kalmanfilter)
 add_subdirectory(templatematcher)
+add_subdirectory(watsonvisualrecognition)
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_LIBRARY_OUTPUT_DIRECTORY_MAIN})
