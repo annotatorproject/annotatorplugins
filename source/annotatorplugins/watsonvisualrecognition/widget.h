@@ -13,7 +13,7 @@ class Widget : public QWidget {
  public:
   explicit Widget(QWidget *parent = 0);
   ~Widget();
-    std::string getApiKey();
+  std::string getApiKey();
 
  private slots:
 

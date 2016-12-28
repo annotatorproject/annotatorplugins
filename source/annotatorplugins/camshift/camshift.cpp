@@ -38,9 +38,7 @@ bool CamShift::setFrame(shared_ptr<Frame> frame, cv::Mat image) {
 }
 
 // first call
-void CamShift::setObject(shared_ptr<Object> object) {
-  this->object = object;
-}
+void CamShift::setObject(shared_ptr<Object> object) { this->object = object; }
 
 shared_ptr<Object> CamShift::getObject() const { return object; }
 
@@ -59,7 +57,7 @@ void CamShift::setLastAnnotation(shared_ptr<Annotation> annotation) {
 }
 
 std::vector<shared_ptr<Commands::Command>> CamShift::getCommands() {
-  std::vector<shared_ptr<Commands::Command> > commands;
+  std::vector<shared_ptr<Commands::Command>> commands;
   if (object == nullptr || frame == nullptr || lastFrame == nullptr ||
       this->lastAnnotation == nullptr || frame == lastFrame)
     return commands;
@@ -74,7 +72,8 @@ std::vector<shared_ptr<Commands::Command>> CamShift::getCommands() {
     int y = found_rect.y;
 
     shared_ptr<Commands::NewAnnotation> nA =
-        std::make_shared<Commands::NewAnnotation>(getProject()->getSession(), lastAnnotation->getObject(),
+        std::make_shared<Commands::NewAnnotation>(getProject()->getSession(),
+                                                  lastAnnotation->getObject(),
                                                   frame, x, y, w, h);
     commands.push_back(nA);
 

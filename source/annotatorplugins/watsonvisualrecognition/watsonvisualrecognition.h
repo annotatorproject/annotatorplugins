@@ -1,8 +1,8 @@
 #ifndef WATSONVISUALRECOGNITION_H
 #define WATSONVISUALRECOGNITION_H
 
-#include "widget.h"
 #include <annotator/plugins/plugin.h>
+#include "widget.h"
 
 #include <QtCore/QObject>
 #include <QtCore/QtPlugin>
@@ -10,7 +10,8 @@
 #include <memory>
 #include <opencv2/core/mat.hpp>
 
-#define WATSON_VR_API_URL "https://gateway-a.watsonplatform.net/visual-recognition/api/v3/classify"
+#define WATSON_VR_API_URL \
+  "https://gateway-a.watsonplatform.net/visual-recognition/api/v3/classify"
 
 using std::shared_ptr;
 using namespace AnnotatorLib;
@@ -24,11 +25,11 @@ namespace Plugins {
 
 class WatsonVisualRecognition : public Plugin {
   Q_OBJECT
-  Q_PLUGIN_METADATA(IID "annotator.watsonvisualrecognition" FILE "watsonvisualrecognition.json")
+  Q_PLUGIN_METADATA(IID "annotator.watsonvisualrecognition" FILE
+                        "watsonvisualrecognition.json")
   Q_INTERFACES(Annotator::Plugin)
 
-public:
-
+ public:
   WatsonVisualRecognition();
   ~WatsonVisualRecognition();
   QString getName() override;
@@ -39,9 +40,10 @@ public:
   void setLastAnnotation(shared_ptr<Annotation> annotation) override;
   std::vector<shared_ptr<Commands::Command>> getCommands() override;
 
-  static std::string classify(std::string uri, const std::string &api_key, cv::Mat image);
+  static std::string classify(std::string uri, const std::string &api_key,
+                              cv::Mat image);
 
-protected:
+ protected:
   cv::Mat frameImg;
   shared_ptr<Annotation> lastAnnotation = nullptr;
   shared_ptr<Object> object = nullptr;
@@ -50,9 +52,8 @@ protected:
 
   shared_ptr<Frame> frame = nullptr;
   shared_ptr<Frame> lastFrame = nullptr;
-
 };
 }
 }
 
-#endif // WATSONVISUALRECOGNITION_H
+#endif  // WATSONVISUALRECOGNITION_H

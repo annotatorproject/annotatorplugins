@@ -7,9 +7,9 @@
 
 #include <opencv2/video/tracking.hpp>
 
-#include <annotator/plugins/plugin.h>
-#include <AnnotatorLib/Object.h>
 #include <AnnotatorLib/Frame.h>
+#include <AnnotatorLib/Object.h>
+#include <annotator/plugins/plugin.h>
 
 #include "widget.h"
 
@@ -26,7 +26,6 @@ class KalmanFilter : public Plugin {
   Q_INTERFACES(Annotator::Plugin)
 
  public:
-
   const int kMaxInvisibility = 5;
 
   KalmanFilter();
@@ -37,11 +36,12 @@ class KalmanFilter : public Plugin {
   bool setFrame(shared_ptr<AnnotatorLib::Frame> frame, cv::Mat image) override;
   void setObject(shared_ptr<AnnotatorLib::Object> object) override;
   shared_ptr<AnnotatorLib::Object> getObject() const override;
-  void setLastAnnotation(shared_ptr<AnnotatorLib::Annotation> annotation) override;
-  std::vector<shared_ptr<AnnotatorLib::Commands::Command>> getCommands() override;
+  void setLastAnnotation(
+      shared_ptr<AnnotatorLib::Annotation> annotation) override;
+  std::vector<shared_ptr<AnnotatorLib::Commands::Command>> getCommands()
+      override;
 
  protected:
-
   Widget widget;
   shared_ptr<AnnotatorLib::Object> object;
   shared_ptr<AnnotatorLib::Frame> frame;
@@ -50,7 +50,6 @@ class KalmanFilter : public Plugin {
   cv::Mat measurement;
   std::pair<cv::Rect2f, bool> out;
   bool initialized = false;
-
 
   void init();
 };

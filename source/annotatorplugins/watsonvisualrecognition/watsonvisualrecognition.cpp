@@ -54,8 +54,7 @@ shared_ptr<Object> WatsonVisualRecognition::getObject() const { return object; }
 // second call
 void WatsonVisualRecognition::setLastAnnotation(
     shared_ptr<Annotation> annotation) {
-  if (annotation == nullptr || annotation->getObject() != object)
-    return;
+  if (annotation == nullptr || annotation->getObject() != object) return;
   if (lastAnnotation != nullptr &&
       annotation->getObject() == lastAnnotation->getObject())
     return;
@@ -64,7 +63,9 @@ void WatsonVisualRecognition::setLastAnnotation(
 std::vector<shared_ptr<Commands::Command>>
 WatsonVisualRecognition::getCommands() {
   std::vector<shared_ptr<Commands::Command>> commands;
-  std::cout << classify(std::string(WATSON_VR_API_URL), widget.getApiKey(), this->frameImg) << std::endl;
+  std::cout << classify(std::string(WATSON_VR_API_URL), widget.getApiKey(),
+                        this->frameImg)
+            << std::endl;
   return commands;
 }
 

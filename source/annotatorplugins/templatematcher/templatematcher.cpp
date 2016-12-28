@@ -40,8 +40,7 @@ shared_ptr<Object> TemplateMatcher::getObject() const { return object; }
 
 // second call
 void TemplateMatcher::setLastAnnotation(shared_ptr<Annotation> annotation) {
-  if (annotation == nullptr || annotation->getObject() != object)
-    return;
+  if (annotation == nullptr || annotation->getObject() != object) return;
   if (lastAnnotation != nullptr &&
       annotation->getObject() == lastAnnotation->getObject())
     return;

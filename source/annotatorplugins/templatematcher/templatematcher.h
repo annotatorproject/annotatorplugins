@@ -1,8 +1,8 @@
 #ifndef TEMPLATEMATCHER_H
 #define TEMPLATEMATCHER_H
 
-#include "widget.h"
 #include <annotator/plugins/plugin.h>
+#include "widget.h"
 
 #include <opencv2/core/mat.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
@@ -26,7 +26,7 @@ class TemplateMatcher : public Plugin {
   Q_PLUGIN_METADATA(IID "annotator.templatematcher" FILE "templatematcher.json")
   Q_INTERFACES(Annotator::Plugin)
 
-public:
+ public:
   TemplateMatcher();
   ~TemplateMatcher();
   QString getName() override;
@@ -41,7 +41,7 @@ public:
   shared_ptr<Annotation> lastAnnotation = nullptr;
   shared_ptr<Object> object = nullptr;
 
-protected:
+ protected:
   Widget widget;
 
   shared_ptr<Frame> frame = nullptr;
@@ -58,4 +58,4 @@ protected:
 }
 }
 
-#endif // TEMPLATEMATCHER_H
+#endif  // TEMPLATEMATCHER_H

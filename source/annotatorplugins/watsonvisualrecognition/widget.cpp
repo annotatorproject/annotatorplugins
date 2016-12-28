@@ -7,7 +7,6 @@ Widget::Widget(QWidget *parent) : QWidget(parent), ui(new Ui::Widget) {
 
 Widget::~Widget() { delete ui; }
 
-std::string Widget::getApiKey()
-{
-    return ui->apiKeyLineEdit->text().toStdString();
+std::string Widget::getApiKey() {
+  return ui->apiKeyLineEdit->text().toStdString();
 }

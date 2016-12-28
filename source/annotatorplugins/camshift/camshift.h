@@ -1,8 +1,8 @@
 #ifndef CAMSHIFT_H
 #define CAMSHIFT_H
 
-#include "widget.h"
 #include <annotator/plugins/plugin.h>
+#include "widget.h"
 
 #include <QtCore/QObject>
 #include <QtCore/QtPlugin>
@@ -25,7 +25,7 @@ class CamShift : public Plugin {
   Q_PLUGIN_METADATA(IID "annotator.camshift" FILE "camshift.json")
   Q_INTERFACES(Annotator::Plugin)
 
-public:
+ public:
   CamShift();
   ~CamShift();
   QString getName() override;
@@ -36,7 +36,7 @@ public:
   void setLastAnnotation(shared_ptr<Annotation> annotation) override;
   std::vector<shared_ptr<Commands::Command>> getCommands() override;
 
-protected:
+ protected:
   cv::Mat frameImg;
   shared_ptr<Annotation> lastAnnotation = nullptr;
   shared_ptr<Object> object = nullptr;
@@ -63,4 +63,4 @@ protected:
 }
 }
 
-#endif // CAMSHIFT_H
+#endif  // CAMSHIFT_H
