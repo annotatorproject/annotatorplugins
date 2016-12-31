@@ -34,6 +34,8 @@ addons:
    - libjasper-dev
    - libdc1394-22-dev
    - libboost-all-dev
+   - libpoco-dev
+   - libmysqlclient-dev
 
 install:
  - if [ "${TRAVIS_OS_NAME}" == "linux" ]; then
@@ -66,13 +68,20 @@ before_script:
  - curl -sL https://github.com/Itseez/opencv/archive/3.1.0.zip > opencv.zip
  - unzip opencv.zip
  - cd opencv-3.1.0
-
  - mkdir build install
  - cd build
  - cmake -DCMAKE_BUILD_TYPE=RELEASE -DWITH_FFMPEG=OFF -DWITH_IPP=OFF ..
  - make -j8
  - sudo make install
  - cd ../../
+
+ - git clone https://github.com/pocoproject/poco
+ - sed -i 's#mysqlclient_r#mysqlclient mysqlclient_r#g' poco/cmake/FindMySQL.cmake
+ - cd poco
+ - mkdir -p build
+ - cd build
+ - cmake -DCMAKE_BUILD_TYPE=Release .. && make -j3 && sudo make install && sudo ldconfig
+ - cd ../..
 
  - git clone https://github.com/davisking/dlib
  - cd dlib
